@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+
+        <meta charset="UTF-8"/>
+        <meta name="viewport"
+                content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+        <title> Reserva tu viaje </title>
+        <link rel="stylesheet" href="estilo.css"/>
+
+    </head>
+    <body>
+
+        <a href="MainPage.html"><img class="pod" src="images/auranInicio.png"/></a>
+
+        <header class="trip-form-header">
+            <h1> Explora con HyperLoopTrips!  </h1>
+            <p><em> Reserva tu próximo viaje con nosotros, nos encanta ser tu compañía en cada aventura! </em></p>
+            <p><em>Al escogernos estás colaborando a reducir la contaminación. </em></p>
+        </header>
+
+
+        <form action="" method="get" class="trip-form">
+
+            <div class="form-row">
+                <label for="full-name"> Nombre </label>
+                <input id="full-name" name="full-name" type="text"/>
+            </div>
+
+            <div class="form-row">
+                <label for="full-name"> Apellidos </label>
+                <input id="full-name" name="full-name" type="text"/>
+            </div>
+
+            <div class="form-row">
+                <label for="id"> DNI </label>
+                <input id="id" name="id" type="number"/>
+            </div>
+
+            <div class="form-row">
+                <label for="email"> Correo electrónico </label>
+                <input id="email"
+                        name="email"
+                        type="email"
+                        placeholder="cux@ejemplo.com"/>
+            </div>
+
+            <fieldset class="legacy-form-row">
+                <legend> Tipo de pasaje </legend>
+                <input id="trip-type-1"
+                        name="trip-type"
+                        type="radio"
+                        value="business"/>
+                <label for="trip-type-1" class="radio-label"> Business </label>
+                <input id="trip-type-2"
+                        name="trip-type"
+                        type="radio"
+                        value="economy"
+                        checked />
+                <label for="trip-type-2" class="radio-label"> Económico </label>
+            </fieldset>
+
+            <div class="form-row">
+                <label for="pronouns"> Pronombres </label>
+                <select id="pronouns" name="pronouns">
+                    <option value="they/them"> Elle/le </option>
+                    <option value="she/her"> Ella/la </option>
+                    <option value="he/him"> Él/el </option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="departure"> Salida </label>
+                <select id="departure" name="departure">
+                    <option value="med"> Medellín, Colombia </option>
+                    <option value="vlc"> Valencia, España </option>
+                    <option value="edi"> Edimburgo, Reino Unido </option>
+                    <option value="boston"> Boston, Estados Unidos </option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="destination"> Destino </label>
+                <select id="destination" name="destination">
+                    <option value="med"> Medellín, Colombia </option>
+                    <option value="vlc"> Valencia, España </option>
+                    <option value="edi"> Edimburgo,Reino Unido </option>
+                    <option value="boston"> Boston, Estados Unidos </option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label for="departure-date"> Fecha de ida </label>
+                <input id="departure-date" name="departure-date" type="date"/>
+            </div>
+
+            <div class="form-row">
+                <label for="return-date"> Fecha de vuelta</label>
+                <input id="return-date" name="return-date" type="date"/>
+                <div class="instructions"> Dejar en blanco en caso de ser solo un pasaje de ida.</div>
+            </div>
+
+            <div class="form-row">
+                <label for="abstract"> Observaciones </label>
+                <textarea id="abstract" name="abstract"></textarea>
+                <div class="instructions"> Nos pueden informar en 500 palabras si se padece alguna discapacidad, alergías u otros aspectos a tener en cuenta. </div>
+            </div>
+
+            <div class="form-row">
+                <label class="checkbox-label" for="available">
+                <input id="available"
+                        name="available"
+                        type="checkbox"
+                        value="accepts"
+                        checked/>
+                <span> He leído y acepto los términos y condiciones </span>
+                </label>
+            </div>
+
+            <div class="form-row">
+                <label class="checkbox-label" for="available">
+                <input id="available"
+                        name="available"
+                        type="checkbox"
+                        value="accepts"/>
+                <span> Acepto que se destine el 30% de los fondos <br> recaudados con mi pasaje hacia la <br>colonización de Marte. </span>
+                </label>
+            </div>
+
+            <div class="form-row">
+                <button> Submit </button>
+            </div>
+
+        </form>
+
+        <img class="logo" src="images/Auran Blanco.png"/>
+
+    </body>
+</html>
