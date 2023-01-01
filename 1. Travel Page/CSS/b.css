@@ -1,0 +1,41 @@
+
+ 
+ .img-galeria {
+     width: 30%;
+     display: block;
+     margin-bottom: 30px;
+     margin-top: 30px;
+     box-shadow: 0 0 6px rgba(0,0,0,0.5);
+     cursor: pointer;
+ }
+ 
+ .close {
+     position: absolute;
+     top: 15px;
+     right: 15px;
+     width: 40px;
+     cursor: pointer;
+ }
+ 
+ .cont-email {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }
+ 
+ .container {
+     width: 100%;
+     display: flex;
+     max-width: 1100px;
+ }
+ 
+ .buton {
+     display: flex;
+     justify-content: center;
+    
+ }
+ 
+ .buton:hover {
+     cursor: pointer;
+     box-shadow: rgba(0 0 0.5);
+ } 
