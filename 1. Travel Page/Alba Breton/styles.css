@@ -4,35 +4,114 @@
 }
 
 .main-header{
-    background: bisque;
+    background: url(fondoItaliano.jpg); /** sacar fotos de unsplash, con mucha resolución*/
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     height: 100vh;
     font-family: 'Dosis', sans-serif;
+    position: relative;
+    overflow: hidden;
 }
 
 .main-nav{
-    background: rosybrown;
     display: flex;
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,0.35));
+    
 }
 
 .logo{
-    background: rgb(106, 197, 106);
+    background-image: url(logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 100px;
     font-size: 1.3rem;
-    /** padding: 20px 35px;  */
+    padding: 20px 35px;
+    color: #fff;
 }
 
 ul{
-    background: lightskyblue;
     display: flex;
     margin-right: 100px;
     margin-left: auto;
+    color: #fff;
 }
 
 ul li a{
     display: inline-block;
     padding: 20px 35px;
     font-size: 1.3rem;
+    color: #fff;
+}
+
+ul li a:hover{
+    background: rgb(15, 56, 220);
+}
+
+.content-header{
+    color: #fff;
+    /**background: lightslategray;*/
+    position: absolute;
+    top: 15%;
+    left: 10%; 
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0,0,0,0.35));
+    border-radius: 5%;
+}
+
+.content-header h1{
+    font-size: 5rem;
+}
+
+.content-header p{
+    font-size: 1.5rem;
+}
+
+.content-header a{
+    font-size: 1.3rem;
+    display: inline-block;
+    padding: 20px 15px;
+    color: #fff;
+    background: rgb(15, 56, 220);
+    border-radius: 15%;
+
+}
+
+.content-header a:hover {
+    background: rgb(45, 45, 161);
+    border: 1.5px solid #fff;
+    padding: 18.5px 13.5px;
+}
+
+.linea,
+.linea2{
+    position: absolute;
+    width: 20px;
+    height: 130%;
+    background: #fff;
+    right: 5%;
+    transform: rotate(15deg);
+}
+
+.linea2{
+    right: 7%;
+    top: -50px;
+}
+
+footer{
+    color: #fff;
+    position: absolute;
+    top: 96%;
+    left: 1%;
+}
+
+section{
+    padding: 25px 10px;
+}
+
+input{
+    margin-right: 20px;
 }
