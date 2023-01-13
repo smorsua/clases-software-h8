@@ -1,6 +1,6 @@
 ## Valoración general
 
--   El HTML se entiende muy bien porque has elegido elementos semanticos (`header`, `nav`...). Para el formulario que tienes que usar \<form>. Te dejo [este tutorial](https://www.w3schools.com/html/html_forms.asp)
+-   El HTML se entiende muy bien porque has elegido elementos semanticos (`header`, `nav`...). Para el formulario que tienes que usar \<form>. Te dejo [este tutorial](https://www.w3schools.com/html/html_forms.asp)r
 
 -   El CSS está bien, abajo tienes algún comentario. Me ha parecido interesante las propiedades como `transform: rotate` y `linear-gradient`. Transform es una pasada, mira [este ejemplo](https://cssbattle.dev/learn) donde se usa para meter efectos 3D! (tienes que pasar el ratón por encima de las tarjetas). Con lo que has aprendido, podrías hacer ese elemento sin problemas.
 
