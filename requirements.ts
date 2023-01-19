@@ -15,6 +15,9 @@
  */
 
 //Devuelve una palabra que teclea el usuario
+
+/*
+
 function getUserInput(): string;
 
 //Devuelve un booleano que indica si la palabra es de 5 letras o no
@@ -47,5 +50,6 @@ function printUserSolution(
 //Devuelve la letra coloreada con el estilo adecuado según el estado
 function applyLetterStyle(letterReview: {
     letter: string;
+    color: string;
     state: "Correct" | "Misplaced" | "Incorrect";
-}): string;
+}): string; */
