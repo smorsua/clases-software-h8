@@ -1,0 +1,15 @@
+{
+  "name": "wordlecuxprada",
+  "version": "1.0.0",
+  "description": "wordle en terminal con colorsitos",
+  "main": "Wordle.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "hoodrichpirobo",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
