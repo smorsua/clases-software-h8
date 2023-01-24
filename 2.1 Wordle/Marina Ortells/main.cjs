@@ -13,10 +13,15 @@ function chooseSolution() {
     return solution;
 }
 
+let sol = chooseSolution();
 
-for (let m = 0; m < guessesRemaining; m++) {
 
-getUserInput();
+for (let m = 0; m < guessesRemaining + 1; m++) {
+
+//getWordReview(sol);
+
+//getUserInput();
+getUserInput(sol);
 
 function getUserInput(sol){
     var readline = require('readline-sync');
@@ -24,13 +29,13 @@ function getUserInput(sol){
     var length = userInput.length;
     let input = String(userInput).toUpperCase();
     if (length == 5) {
-        getWordReview(input, sol);
+        getWordReview(input,sol);
     }
     else {getUserInput(); }
 }
 
 function getWordReview(input, sol) {
-    var sol = chooseSolution();
+    //var sol = chooseSolution();
     const inputArr = input.split('');
     const solArr = sol.split('');
     console.log(solArr);
@@ -118,7 +123,7 @@ function getWordReview(input, sol) {
             console.log(chalk.yellow(coloredletter));
         }
 
-        //again();
+                //again();
 
     } 
 
@@ -137,7 +142,7 @@ function getWordReview(input, sol) {
                 console.log("Game over!")
                 console.log("The correct word was: " + input);
             }
+        */
     }
-    */
+    
 
-}
