@@ -3,36 +3,37 @@
 
 const chalk = require("chalk");
 
+const GUESSES = 5
+let guessesRemaining = GUESSES;
+
 function chooseSolution() {
-
-    const GUESSES = 5
-    let guessesRemaining = GUESSES;
-
     var possibilities = ["SPACE", "WORDS", "INPUT", "CACHE", "PRINT", "ASCII", "DEBUG", "CLICK", "MODEM", "ROBOT", "PROXY", "WRITE", "VIRUS"];
     let word = Math.floor(Math.random() * possibilities.length);
     let solution = possibilities[word];
     return solution;
 }
 
+
+for (let m = 0; m < guessesRemaining; m++) {
+
 getUserInput();
 
-function getUserInput() {
+function getUserInput(sol){
     var readline = require('readline-sync');
     var userInput = readline.question("Input a word: ");
     var length = userInput.length;
     let input = String(userInput).toUpperCase();
     if (length == 5) {
-        getWordReview(input);
+        getWordReview(input, sol);
     }
     else {getUserInput(); }
-    chooseSolution();
-    }
+}
 
 function getWordReview(input, sol) {
     var sol = chooseSolution();
     const inputArr = input.split('');
     const solArr = sol.split('');
-    //console.log(solArr);
+    console.log(solArr);
     var n = 0;
     var veces = 0;
     var iteraciones = 0
@@ -47,11 +48,20 @@ function getWordReview(input, sol) {
 
         if (!(solArr.includes(inputArr))) {
             iteraciones = n + 1;
+            guessesRemaining --;
             inputLetter = "Incorrect";
         }
+
+
         
 
         for (let i = 0; i < solArr.length; i++) {
+            
+            if (input == sol) {
+                guessesRemaining = 0;
+                console.log("Correct!! You guessed right!");
+                break;
+            } 
             
             if ((inputArr[i] == solArr[i])) {
                 iteraciones++;
@@ -86,22 +96,48 @@ function getWordReview(input, sol) {
 
         }
         
-    
+        if (guessesRemaining == 0) {
+            console.log("Game over!");
+            break;
+        }
+        
+        }
     }
+
+
+    function printUserSolution(inputLetter, coloredletter) {
+        if (inputLetter == "Correct") {
+
+            console.log(chalk.green(coloredletter));
+        }
+        else if (inputLetter == "Incorrect") {
+
+            console.log(chalk.red(coloredletter));
+        }
+        else { 
+            console.log(chalk.yellow(coloredletter));
+        }
+
+        //again();
+
+    } 
+
+    /*function again(input, solution) {
+        if (input == solution) {
+        console.log("Correct!! You guessed right");
+        guessesRemaining = 0;
+        }
+
+        else { 
+            guessesRemaining --; 
+            console.log("You've got " + guessesRemaining + " guesses remaining");
+        }
+
+            if (guessesRemaining == 0) {
+                console.log("Game over!")
+                console.log("The correct word was: " + input);
+            }
+    }
+    */
+
 }
-
-
-function printUserSolution(inputLetter, coloredletter) {
-    if (inputLetter == "Correct") {
-
-        console.log(chalk.green(coloredletter));
-    }
-    else if (inputLetter == "Incorrect") {
-
-        console.log(chalk.red(coloredletter));
-    }
-    else { 
-        console.log(chalk.yellow(coloredletter));
-    }
-
-} 
