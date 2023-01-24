@@ -1,8 +1,13 @@
-//import chalk from 'chalk';
 
+//para ejecutar el código hay que escribir en la terminal: "node main.cjs"
 
-chooseSolution();
+const chalk = require("chalk");
+
 function chooseSolution() {
+
+    const GUESSES = 5
+    let guessesRemaining = GUESSES;
+
     var possibilities = ["SPACE", "WORDS", "INPUT", "CACHE", "PRINT", "ASCII", "DEBUG", "CLICK", "MODEM", "ROBOT", "PROXY", "WRITE", "VIRUS"];
     let word = Math.floor(Math.random() * possibilities.length);
     let solution = possibilities[word];
@@ -20,64 +25,83 @@ function getUserInput() {
         getWordReview(input);
     }
     else {getUserInput(); }
+    chooseSolution();
     }
 
 function getWordReview(input, sol) {
     var sol = chooseSolution();
     const inputArr = input.split('');
     const solArr = sol.split('');
+    //console.log(solArr);
+    var n = 0;
+    var veces = 0;
+    var iteraciones = 0
 
-    for (let i = 0; i < solArr.length; i++) {
-        getLetterState(inputArr[i], solArr[i]);
-    }
-
-    getLetterCountMap(inputArr, solArr) 
-
-}
-
-function getLetterState(inputLetter, solutionLetter) {
-    if (inputLetter == solutionLetter) {
-        console.log(inputLetter + ": Correct");
-    }
-    else if (!solutionLetter.includes(iputLetter))
-        console.log(inputLetter + ": Incorrect");
-    else {
-        console.log(inputLetter + ": Misplaced");
-    }
-}
-
-function getLetterCountMap(inputArr, solArr) {
-    let veces = 0;
-    for (let i = 0; i < inputArr.length; i++) {
-        if (solArr.includes(inputArr[i])) {
-            veces = veces + 1;
+    for (let j = 0; j < solArr; j++) {
+        if (solArr.includes(inputArr[j])) {
+            n++;
         }
-        else {
+    } 
+
+    while (iteraciones <= n) {
+
+        if (!(solArr.includes(inputArr))) {
+            iteraciones = n + 1;
+            inputLetter = "Incorrect";
+        }
+        
+
+        for (let i = 0; i < solArr.length; i++) {
+            
+            if ((inputArr[i] == solArr[i])) {
+                iteraciones++;
+                veces++;
+                //console.log(inputArr[i] + ": Correct");
+                inputLetter = "Correct";
+                var coloredletter = inputArr[i];
+                //console.log(chalk.green(coloredletter));
+
+
+
+            }
+            else if (!(solArr.includes(inputArr[i]))) {
+                //console.log(inputArr[i] + ": Incorrect");
+                inputLetter = "Incorrect";
+                var coloredletter = inputArr[i];
+                //console.log(chalk.red(coloredletter));
+            }
+            else {
+                //console.log(inputArr[i] + ": Misplaced");
+                iteraciones++;
+                veces++;
+                inputLetter = "Misplaced";
+                var coloredletter = inputArr[i];
+                //console.log(chalk.yellow(coloredletter));
+            }
+
             veces = 0;
-        }
-        console.log(inputArr[i] + " se repite " + veces + " veces");
-    }
+            iteraciones = i + 1;
 
+            printUserSolution(inputLetter, coloredletter);
+
+        }
+        
+    
+    }
 }
 
-function printUserSolution(inputLetter, solutionLetter, )
-/*
 
+function printUserSolution(inputLetter, coloredletter) {
+    if (inputLetter == "Correct") {
 
+        console.log(chalk.green(coloredletter));
+    }
+    else if (inputLetter == "Incorrect") {
 
-//Devuelve el estado de una letra de la palabra del usuario en función de la letra correcta obtenida de la solución y cuantas veces a sido comprobada esa letra (esto último lo sacamos del mapa)
-function getLetterStatus(
-    userLetter,
-    solutionLetter,
-    userLetterCount,
-    solutionLetterCount
-): { letter: string; state: "Correct" | "Misplaced" | "Incorrect" };
+        console.log(chalk.red(coloredletter));
+    }
+    else { 
+        console.log(chalk.yellow(coloredletter));
+    }
 
-//Imprime la solución propuesta por el usuario con los colores adecuados en cada letra
-function printUserSolution(
-    wordReview: [
-        { letter: string; state: "Correct" | "Misplaced" | "Incorrect" }
-    ]
-);
-
-*/
+} 
