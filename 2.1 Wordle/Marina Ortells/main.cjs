@@ -22,13 +22,15 @@ for (let m = 0; m < guessesRemaining + 4; m++) {
 
         function getUserInput(sol){
             var readline = require('readline-sync');
-            var userInput = readline.question("Input a word: ");
+            var userInput = readline.question("Input a 5 letter word: ");
             var length = userInput.length;
             let input = String(userInput).toUpperCase();
-            if (length == 5) {
+            getWordReview(input, sol);
+
+            /*if (length == 5) {
                 getWordReview(input, sol);
             }
-            else {getUserInput(); }
+            else {getUserInput(); } */
         }
 
         function getWordReview(input, sol) {
@@ -90,7 +92,7 @@ for (let m = 0; m < guessesRemaining + 4; m++) {
 
                     if (guessesRemaining == 0) {
                         console.log("Sorry, you lost!")
-                        console.log("The correct word was " + sol.toLowerCase());
+                        console.log("The correct word was " + (sol).toLowerCase());
                         finish();
                     }
                 }
