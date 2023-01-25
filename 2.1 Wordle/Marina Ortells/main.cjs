@@ -1,7 +1,6 @@
 
-//para ejecutar el código hay que escribir en la terminal: "node main.cjs"
-
 const chalk = require("chalk");
+const { avogadroDependencies } = require("mathjs");
 
 const GUESSES = 5
 let guessesRemaining = GUESSES;
@@ -16,11 +15,8 @@ function chooseSolution() {
 let sol = chooseSolution();
 
 
-for (let m = 0; m < guessesRemaining + 1; m++) {
+for (let m = 0; m < guessesRemaining; m++) {
 
-//getWordReview(sol);
-
-//getUserInput();
 getUserInput(sol);
 
 function getUserInput(sol){
@@ -35,9 +31,8 @@ function getUserInput(sol){
 }
 
 function getWordReview(input, sol) {
-    //var sol = chooseSolution();
-    const inputArr = input.split('');
-    const solArr = sol.split('');
+    var inputArr = input.split('');
+    var solArr = sol.split('');
     console.log(solArr);
     var n = 0;
     var veces = 0;
@@ -53,64 +48,64 @@ function getWordReview(input, sol) {
 
         if (!(solArr.includes(inputArr))) {
             iteraciones = n + 1;
-            guessesRemaining --;
             inputLetter = "Incorrect";
         }
 
-
-        
-
         for (let i = 0; i < solArr.length; i++) {
-            
-            if (input == sol) {
-                guessesRemaining = 0;
-                console.log("Correct!! You guessed right!");
-                break;
-            } 
             
             if ((inputArr[i] == solArr[i])) {
                 iteraciones++;
                 veces++;
-                //console.log(inputArr[i] + ": Correct");
                 inputLetter = "Correct";
                 var coloredletter = inputArr[i];
-                //console.log(chalk.green(coloredletter));
-
-
-
             }
             else if (!(solArr.includes(inputArr[i]))) {
-                //console.log(inputArr[i] + ": Incorrect");
                 inputLetter = "Incorrect";
                 var coloredletter = inputArr[i];
-                //console.log(chalk.red(coloredletter));
             }
             else {
-                //console.log(inputArr[i] + ": Misplaced");
                 iteraciones++;
                 veces++;
                 inputLetter = "Misplaced";
-                var coloredletter = inputArr[i];
-                //console.log(chalk.yellow(coloredletter));
-            }
+                var coloredletter = inputArr[i]
 
+            }
             veces = 0;
             iteraciones = i + 1;
 
             printUserSolution(inputLetter, coloredletter);
 
+            /*if (guessesRemaining == 0) {
+                console.log("Game over!");
+                finish();
+            } */
+            //printUserSolution(inputLetter, coloredletter, inputArr, solArr);
+            //again(solArr, inputArr);
+
         }
         
-        if (guessesRemaining == 0) {
+        if (input == sol) {
+            guessesRemaining = 0;
+            console.log("Correct!! You guessed right!");
+            finish();
+        } 
+
+        else { guessesRemaining = guessesRemaining -1; }
+
+        /*if (guessesRemaining == 0) {
             console.log("Game over!");
-            break;
-        }
+            finish();
+        } */
         
         }
+
+    }
+
     }
 
 
-    function printUserSolution(inputLetter, coloredletter) {
+    function printUserSolution(inputLetter, coloredletter, guessesRemaining) {
+        // ver si cada letra es correcta o no
         if (inputLetter == "Correct") {
 
             console.log(chalk.green(coloredletter));
@@ -123,26 +118,24 @@ function getWordReview(input, sol) {
             console.log(chalk.yellow(coloredletter));
         }
 
-                //again();
-
     } 
 
-    /*function again(input, solution) {
-        if (input == solution) {
-        console.log("Correct!! You guessed right");
-        guessesRemaining = 0;
-        }
 
-        else { 
-            guessesRemaining --; 
+    function again(inputArr, solArr) {
+
+        if (guessesRemaining != 0) { 
             console.log("You've got " + guessesRemaining + " guesses remaining");
         }
 
-            if (guessesRemaining == 0) {
-                console.log("Game over!")
-                console.log("The correct word was: " + input);
+        else {
+            console.log("Game over!")
+            console.log("The correct word was: " + solArr);
             }
-        */
+    }
+    
+
+    function finish() {
+        console.log("Thank you for playing!");
     }
     
 
