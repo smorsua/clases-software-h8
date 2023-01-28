@@ -107,7 +107,7 @@ userInput = "METER";
 
 Cuando uses el mapa, el bucle while que tienes se cambiara por un solo bucle for que iterará cada letra.
 
-## ⚠️ Correciones de código importantes
+## ⚠️ Correciones importantes
 
 -   Declara las funciones fuera del bucle porque si no se están redeclarando cada vez que el bucle se ejecuta
 
