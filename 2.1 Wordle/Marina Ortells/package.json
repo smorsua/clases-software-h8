@@ -1,19 +1,19 @@
 {
-  "name": "exit",
-  "version": "1.0.0",
-  "main": "index.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^4.1.2",
-    "mathjs": "^11.5.0",
-    "readline-sync": "^1.4.10",
-    "request": "^2.88.2",
-    "terminal": "^0.1.4"
-  },
-  "description": ""
+    "name": "exit",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "mathjs": "^11.5.0",
+        "readline-sync": "^1.4.10",
+        "request": "^2.88.2",
+        "terminal": "^0.1.4"
+    },
+    "description": ""
 }
