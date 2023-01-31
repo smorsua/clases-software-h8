@@ -13,7 +13,7 @@ let currentGuess =[];
 
 
 
-// voy a copiar el código de Marina de chooseSolution para comprobar el funcionamiento del código
+// aquí debería incluirse el import del json y hacer esta función con respecto al archivo json
 function chooseSolution() {
     const wordleWords = ["cigar", "rebut", "sissy", "humph", "awake", "blush", "focal", 
         "evade", "naval", "serve", "heath", "dwarf", "model", "karma", "stink", "grade", 
@@ -85,7 +85,7 @@ function deleteLetter() {
     
 }
 
-function handleEnter() { //quizás falte poner máx intentos
+function handleEnter() { //quizás falte poner máx intentos EL ERROR SE ENCUENTRA EN handleEnter() o en sus subfunciones como getWordReview o dyeLetters
     if(nextLetterIndex==(WORD_LENGTH)){
         const rows = document.getElementsByClassName(ROW_CLASS)
         const currentRow = rows[currentRowIndex]
@@ -104,17 +104,17 @@ function handleEnter() { //quizás falte poner máx intentos
     }
 }
 
-function getWordReview(currentGuess,solution,currentLetterElement) { 
+function getWordReview(currentGuess,solution,currentLetterElement) { //creo que el error tiene que ver con que currentLetterElement va cambiando con cada letra, por lo que ponerlo como parámetro no tiene sentido y causa problemas
     const solutionLetterToCount = getLetterMap(solution);
     if (currentGuess.length == WORD_LENGTH) {// aqui iría la condición para saber si la palabra está dentro de las posibles soluciones
         const solArr = solution.split('');
         const GuessLetterToCount = newMap();
-        const ElementMap = newMap();
+        const ElementMap = newMap(); //aquí intento crear un mapa que incluya estado y elemento del gameboard para luego aplicarl progresivamente el dyeLetters()
 
         for(let i = 0; i<WORD_LENGTH; i++) {
             if(!solArr.includes(currentGuess[i])) {
                 inputLetter = "Incorrect"
-                ElementMap.set(currentLetterElement,inputLetter)
+                ElementMap.set(currentLetterElement,inputLetter) //debería ser algo equivalente al coloredletter = currentguess[] pero con los elementos
             } else{
                 if(solArr[i]==currentGuess[i]) {
                     if(!GuessLetterToCount.has(currentGuess[i])) {
