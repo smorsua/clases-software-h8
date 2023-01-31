@@ -89,7 +89,7 @@ function handleEnter() { //quizás falte poner máx intentos
     if(nextLetterIndex==(WORD_LENGTH)){
         const rows = document.getElementsByClassName(ROW_CLASS)
         const currentRow = rows[currentRowIndex]
-        const currentLetterElement = currentRow.children[nextLetterIndex]
+        const currentLetterElement = currentRow.children[nextLetterIndex] // el error puede estar ocasionado por esto 
         
         getWordReview(currentGuess,solution,currentLetterElement)
         for(let j = 0; j = WORD_LENGTH; j++) {
@@ -104,9 +104,9 @@ function handleEnter() { //quizás falte poner máx intentos
     }
 }
 
-function getWordReview(currentGuess,solution,currentLetterElement) {
+function getWordReview(currentGuess,solution,currentLetterElement) { 
     const solutionLetterToCount = getLetterMap(solution);
-    if (currentGuess.length == WORD_LENGTH) {// aqui va un .includes con el archivo json (comprobar si la palabra es posible solucion)
+    if (currentGuess.length == WORD_LENGTH) {// aqui iría la condición para saber si la palabra está dentro de las posibles soluciones
         const solArr = solution.split('');
         const GuessLetterToCount = newMap();
         const ElementMap = newMap();
