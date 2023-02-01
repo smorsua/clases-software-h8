@@ -90,10 +90,10 @@ function handleEnter() { //quizás falte poner máx intentos EL ERROR SE ENCUENT
         const rows = document.getElementsByClassName(ROW_CLASS)
         const currentRow = rows[currentRowIndex]
         const currentLetterElement = currentRow.children[nextLetterIndex] // el error puede estar ocasionado por esto 
-        
+        //seguramente el bug en la lógica esté ocasionado por el currentLetterElement, 
         getWordReview(currentGuess,solution,currentLetterElement)
         for(let j = 0; j = WORD_LENGTH; j++) {
-            dyeLetters(inputLetter, LetterElement, currentLetterElement)
+            dyeLetters(ElementMap, currentLetterElement) //aquí he corregido los parámetros de entrada, quizás el bucle esté mal
         }
         
         nextLetterIndex=0
@@ -109,46 +109,55 @@ function getWordReview(currentGuess,solution,currentLetterElement) { //creo que 
     if (currentGuess.length == WORD_LENGTH) {// aqui iría la condición para saber si la palabra está dentro de las posibles soluciones
         const solArr = solution.split('');
         const GuessLetterToCount = newMap();
-        const ElementMap = newMap(); //aquí intento crear un mapa que incluya estado y elemento del gameboard para luego aplicarl progresivamente el dyeLetters()
+        const ElementMap = newMap(); //aquí intento crear un mapa que incluya estado y elemento del gameboard para luego aplicarle progresivamente el dyeLetters()
 
         for(let i = 0; i<WORD_LENGTH; i++) {
             if(!solArr.includes(currentGuess[i])) {
-                inputLetter = "Incorrect"
-                ElementMap.set(currentLetterElement,inputLetter) //debería ser algo equivalente al coloredletter = currentguess[] pero con los elementos
+                let letterState = INCORRECT
+                buildElementMap()
+                 
             } else{
                 if(solArr[i]==currentGuess[i]) {
-                    if(!GuessLetterToCount.has(currentGuess[i])) {
-                        GuessLetterToCount.set(currentGuess[i], 1)
-                    } else {
-                        GuessLetterToCount.set(currentGuess[i], GuessLetterToCount.get(currentGuess[i]) + 1)
-                    }
-                    inputLetter = 'Correct'
-                    ElementMap.set(currentLetterElement,inputLetter)
+                    buildGuessMap(GuessLetterToCount, currentGuess)
+                    let letterState = CORRECT
+                    buildElementMap(ElementMap, letterState)
                 } else {
-                    if(GuessLetterToCount.get(currentGuess[i] == solutionLetterToCount.get(currentGuess[i]))) {
-                        inputLetter = "Incorrect"
-                        ElementMap.set(currentLetterElement,inputLetter)
+                    if(GuessLetterToCount.get(currentGuess[i]) == solutionLetterToCount.get(currentGuess[i])) { //he corregido un fallo (paréntesis donde no tocaba)
+                        let letterState = INCORRECT
+                        buildElementMap(ElementMap, letterState)
                     } else {
-                        inputLetter = "Misplaced"
-                        ElementMap.set(currentLetterElement,inputLetter)
+                        let letterState = MISPLACED
+                        buildElementMap(ElementMap, letterState)
                     }
                 }
             }
-        }
-        dyeLetters(inputLetter,currentLetterElement)
+        } //he quitado el dyeletters, estaba aquí y en el handleEnter()
     } else {
         console.warn("Your current guess is not included in the word list")
     }
 }
 
-function dyeLetters(inputLetter, currentLetterElement) { //debería asignar a cada letra 
-    const state = ElementMap.get(currentLetterElement)
+function buildElementMap(ElementMap, letterState) {
+    inputLetter = letterState
+    ElementMap.set(currentLetterElement,inputLetter) //debería ser algo equivalente al coloredletter = currentguess[] pero con los elementos
+}
+
+function buildGuessMap(GuessLetterToCount, currentGuess) {
+    if(!GuessLetterToCount.has(currentGuess[i])) {
+        GuessLetterToCount.set(currentGuess[i], 1)
+    } else {
+        GuessLetterToCount.set(currentGuess[i], GuessLetterToCount.get(currentGuess[i]) + 1)
+    }
+}
+
+function dyeLetters(ElementMap, currentLetterElement) { //he cambiado inputletter por ElementMap, ya que es lo que se usa aquí
+    const state = ElementMap.get(currentLetterElement) //esto debería devolver inputLetter
     const LetterElement = currentLetterElement
-    if (state == "Correct") {
+    if (state == CORRECT) {
 
         LetterElement.classList.add(CORRECT)
     }
-    else if (state == "Incorrect") {
+    else if (state == INCORRECT) {
 
         LetterElement.classList.add(INCORRECT) 
     }
