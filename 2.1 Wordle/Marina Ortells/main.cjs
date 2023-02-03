@@ -1,9 +1,16 @@
+//import chalk from "chalk";
+//import readline from "readline-sync";
 
 const chalk = require("chalk");
-const { avogadroDependencies, equalTextDependencies } = require("mathjs");
+const readline = require("readline-sync");
 
 const GUESSES = 5
 let guessesRemaining = GUESSES;
+
+chooseSolution();
+getLetterMapSol(Solution);
+getLetterMapInput(userInput);
+getWordReview(userInput, Solution, valueIn, valueSol);
 
 function chooseSolution() {
     var possibilities = ["SPACE", "WORDS", "INPUT", "CACHE", "PRINT", "ASCII", "DEBUG", "CLICK", "MODEM", "ROBOT", "PROXY", "WRITE", "VIRUS"];
@@ -12,92 +19,141 @@ function chooseSolution() {
     return solution;
 }
 
-var sol = chooseSolution();
-
+const Solution = chooseSolution();
 
 for (let m = 0; m < guessesRemaining + 4; m++) {
-        
+    getUserInput(Solution);
+    }
 
-        getUserInput(sol);
 
-        function getUserInput(sol){
-            var readline = require('readline-sync');
-            var userInput = readline.question("Input a 5 letter word: ");
-            var length = userInput.length;
-            let input = String(userInput).toUpperCase();
-            getWordReview(input, sol);
+function getUserInput(Solution){
+    
+    var userInput = readline.question("Input a 5 letter word: ");
+    return String(userInput).toUpperCase();
+}
 
-            /*if (length == 5) {
-                getWordReview(input, sol);
-            }
-            else {getUserInput(); } */
+const userInput = getUserInput();
+
+function getLetterMapSol(Solution) {
+
+    let SolutionLetterMap = new Map();
+
+    for (let i = 0; i < Solution.length; i++) {
+        if (SolutionLetterMap.has(Solution[i])) {
+            SolutionLetterMap.set(Solution[i], SolutionLetterMap.get(Solution[i]) + 1);
+        }
+        else {
+            SolutionLetterMap.set(Solution[i], 1);
+        }
+    }
+
+    for (let [keySol, valSol] of SolutionLetterMap.entries()) {
+        console.log(keySol + " " + valSol);
+        return valSol;
+    }
+}
+
+const valueSol = getLetterMapSol();
+
+
+function getLetterMapInput(userInput) {
+
+    let InputLetterMap = new Map();
+
+    for (let i = 0; i < userInput.length; i++) {
+        if (InputLetterMap.has(userInput[i])) {
+            InputLetterMap.set(userInput[i], InputLetterMap.get(userInput[i]) + 1);
+        }
+        else {
+            InputLetterMap.set(userInput[i], 1);
+        }
+    }
+
+    for (let [keyIn, valIn] of InputLetterMap.entries()) {
+        console.log(keyIn + " " + valIn);
+        return valIn;
+    }
+
+
+}
+
+const valueIn = getLetterMapInput();
+
+
+
+function getWordReview(userInput, Solution, valueIn, valueSol) {
+    var n = 0;
+
+    var iteraciones = 0
+
+    for (let j = 0; j < Solution.length; j++) {
+        if (Solution.includes(userInput[j])) {
+            n++;
+        }
+    } 
+
+    while (iteraciones <= n) {
+
+        let veces = 0;
+
+        if (!(Solution.includes(userInput))) {
+            iteraciones = n + 1;
+            inputLetter = "Incorrect";
         }
 
-        function getWordReview(input, sol) {
-            var inputArr = input.split('');
-            var solArr = sol.split('');
-            var n = 0;
-            var veces = 0;
-            var iteraciones = 0
+        for (let i = 0; i < Solution.length; i++) {
 
-            for (let j = 0; j < solArr; j++) {
-                if (solArr.includes(inputArr[j])) {
-                    n++;
+            if ((userInput[i] == Solution[i])) {
+                iteraciones++;
+                veces++;
+                inputLetter = "Correct";
+                var coloredletter = userInput[i];
+            }
+            else if (!(Solution.includes(userInput[i]))) {
+                inputLetter = "Incorrect";
+                var coloredletter = userInput[i];
+            }
+            else {
+
+                if (valueSol < valueIn) {
+
+                    iteraciones++;
+                    veces++;
+                    inputLetter = "Misplaced";
+                    var coloredletter = userInput[i]
                 }
-            } 
-
-            while (iteraciones <= n) {
-
-                if (!(solArr.includes(inputArr))) {
-                    iteraciones = n + 1;
-                    inputLetter = "Incorrect";
-                }
-
-                for (let i = 0; i < solArr.length; i++) {
-                    
-                    if ((inputArr[i] == solArr[i])) {
-                        iteraciones++;
-                        veces++;
-                        inputLetter = "Correct";
-                        var coloredletter = inputArr[i];
-                    }
-                    else if (!(solArr.includes(inputArr[i]))) {
-                        inputLetter = "Incorrect";
-                        var coloredletter = inputArr[i];
-                    }
-                    else {
-                        iteraciones++;
-                        veces++;
-                        inputLetter = "Misplaced";
-                        var coloredletter = inputArr[i]
-
-                    }
-                    veces = 0;
-                    iteraciones = i + 1;
-
-                    printUserSolution(inputLetter, coloredletter);
-
-                }
-                
-                if (input == sol) {
-                    guessesRemaining = 0;
-                    console.log("Correct!! You guessed right!");
-                    finish();
-                } 
 
                 else {
-                    
-                    guessesRemaining = guessesRemaining - 1;
-                    console.log("You've got " + guessesRemaining + " guesses remaining");
-
-                    if (guessesRemaining == 0) {
-                        console.log("Sorry, you lost!")
-                        console.log("The correct word was " + (sol).toLowerCase());
-                        finish();
-                    }
+                    inputLetter = "Incorrect";
+                    var coloredletter = userInput[i];
                 }
+
             }
 
+            veces = 0;
+            iteraciones = i + 1;
+
+            printUserSolution(inputLetter, coloredletter);
+
+        }
+    }
+
+        if (userInput == Solution) {
+            guessesRemaining = 0;
+            console.log("Correct!! You guessed right!");
+            finish();
+        } 
+
+        else {
+            
+            guessesRemaining = guessesRemaining - 1;
+            console.log("You've got " + guessesRemaining + " guesses remaining");
+
+            if (guessesRemaining == 0) {
+                console.log("Sorry, you lost!")
+                console.log("The correct word was " + (solStr).toLowerCase());
+                finish();
+            }
         }
     }
 
@@ -114,6 +170,8 @@ function printUserSolution(inputLetter, coloredletter) {
         console.log(chalk.yellow(coloredletter));
     }
 
+
+
 } 
 
 function finish() {
@@ -122,4 +180,6 @@ function finish() {
     
 }
 
-
+getLetterMapSol(Solution);
+getLetterMapInput(userInput);
+getWordReview(userInput, Solution, valueIn, valueSol);

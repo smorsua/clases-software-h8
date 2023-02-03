@@ -1,76 +1,46 @@
 
+/* # es para id y . es para clases */
+
 
 body {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #b9d9eb;
-}
-
-h1 {
-    text-align: center;
-    padding-left: 10pt;
-}
-
-h2 {
-    text-align: center;
-}
-
-p {
-    text-align: center;
-}
-
-/*este no funciona bien y no sé por qué
-button {
-    text-align: center;
-}
-*/
-
-.main-container{
-    border: 1px sold black;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end; /*arriba, abajo*/
     align-items: center;
-    background-color: #b9d9eb;
 
+    font-family: Arial;
 }
 
-.row{
+#gameBoard {
     display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
-.boxes{
-    width: 90px; 
-    height: 90px; 
-    background-color: lightgray;
-    border: 1px solid black;
-    outline: none;
-    font-weight: bold;
-    font-size:50px;
-    text-transform: uppercase;
-    text-align: center;
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+
 }
 
-.final{
-    text-align: center;
-    font-size: 30px;
+.message-container p {
+    height: 30px;
+    margin: 0;
+    padding: 10px;
+    background-color: lightgrey;
 }
 
-.button{
-    font-size: 25px;
-    font-weight: bold;
-    width: 150px;
+.letter{
+    width: 100px;
     height: 100px;
-    color: white;
-    border: none;
-    background-color:lightslategrey;
-    align-items: center;
-}
+    border: 1px solid black;
+    border-radius: 0.5rem;
 
-.button:hover{
-    border: lightslategrey;
-    background-color: white;
-    color: lightslategrey;
-    border: 1px solid white;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-weight: bold;
 }
