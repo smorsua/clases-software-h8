@@ -1,29 +1,25 @@
+html{
+    font-size: 12px;
+}
 
-/* # es para id y . es para clases */
-
-
-body {
+body{
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /*arriba, abajo*/
     align-items: center;
-
-    font-family: Arial;
 }
-
-#gameBoard {
+#gameBoard{
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-.row {
+.row{
     display: flex;
     flex-direction: row;
     gap: 1rem;
 
-
 }
+
 .letter{
     width: 100px;
     height: 100px;
@@ -37,12 +33,14 @@ body {
     font-weight: bold;
 }
 
-.tile.flip {
-    animation: 0.5s linear flipping;
+.correct {
+    background-color: green;
 }
 
-.green-overlay {
-    background-color: #538d4e !important;
-    border:none !important;
+.misplaced {
+    background-color: yellow;
+}
 
+.incorrect {
+    background-color: darkgray;
 }

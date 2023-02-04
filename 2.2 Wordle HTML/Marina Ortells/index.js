@@ -8,6 +8,7 @@ const LETTER_CLASS = 'letter';
 const solution = "INPUT";
 
 let nextLetterIndex = 0;
+let currentLetterIndex = 0;
 let currentRowIndex = 0;
 let currentGuess = [];
 let isGameOver = false;
@@ -37,7 +38,12 @@ function handleuserInput() {
     } else if (userInput == 'Backspace' || userInput == 'Delete') {
         deleteLetter(); //if the user presses the backspace or the delete button, it deletes the previous letter
     } else if (userInput == 'Enter') { 
-        enterWord();
+        if (nextLetterIndex == 5) {
+            enterWord();
+            tryColors();
+        } else { 
+            window.alert(`The word must have 5 letters`); 
+        }
     } else {
         console.warn(`${ev.key} is not a valid input`);
     }
@@ -67,6 +73,23 @@ function deleteLetter() {
     }
 }
 
+function enterWord() {
+    const word = currentGuess.join('');
+    const rows = document.getElementsByClassName(ROW_CLASS);
+    const currentRow = rows[currentRowIndex++];
+    nextLetterIndex = 0;
+}
+
+function tryColors() {
+    const letter = document.getElementsByClassName(LETTER_CLASS);
+    const currentLetter = letter[currentLetterIndex];
+    let checkIndex = 
+
+    currentLetter[element].classList.add('green-overlay');
+    }
+
+
+/*
 const word = enterWord();
 
 function enterWord(word) {
@@ -157,7 +180,11 @@ function Message(message) {
 }
 
 
-initBoard();
-handleuserInput();
 checkWord(word);
 getColor(valueSol, valueIn);
+
+*/
+
+initBoard();
+handleuserInput();
+
