@@ -11,6 +11,7 @@ type WordRating = LetterRating[];
 const GUESSES = 5;
 const WORD_LENGTH = 5;
 const ROW_CLASS = "row";
+const LETTER_CLASS = "letter";
 let currentRowIndex = 0;
 let currentLetterIndex = 0;
 let nextLetterIndex = 0;
