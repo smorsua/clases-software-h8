@@ -27,18 +27,21 @@ export class WordleWordComparator {
     
     constructor() {}
 
+    public getLetterState(index: number) {
+        return this.finalRating[index].state
+    };
+
     private solutionArrayBuilding(solution: string) {
         const solutionArr = solution.split('')
         return solutionArr
     };
 
-    private getWordRating(){
+    private getWordRating(currentGuess: string[]){
         let userInputArr = currentGuess
         const solutionArr = this.solutionArrayBuilding(solution)
         this.initComparator(userInputArr,solutionArr)
         this.checkCorrectLetters(userInputArr, solutionArr)
         this.checkMisplacedandIncorrectLetters(userInputArr)
-
     }
 
     private initComparator(userInputArr: string[], solutionArr: string[]) {
@@ -183,13 +186,13 @@ function handleEnter() {
         const rows = document.getElementsByClassName(ROW_CLASS)
         const currentRow = rows[currentRowIndex]
         const currentLetterElement = currentRow.children[nextLetterIndex]
-  
-        
-        const GuessRating = getWordReview(currentGuess, solution)
 
+        const GuessRating = getWordReview()
         for(let j=0; j<WORD_LENGTH; j++) {
             nextLetterIndex++
-            dyeLetters(GuessRating, currentLetterElement)
+
+            const currentLetterState = GuessRating.getLetterState(j)
+            dyeLetters(currentLetterState, currentLetterElement)
         }
         currentRowIndex++
 
@@ -201,17 +204,17 @@ function handleEnter() {
 // Let's dive into handleEnter and how we evaluate the guess
 
 // We have to get the word review and the results will be used for dying each square
-function getWordReview(currentGuess: string[], solution: string, ) {
+function getWordReview() {
 // This should return the letter-state relation.
 const GuessRating = new WordleWordComparator()
 return GuessRating
 }; // Maybe we can do a little function to verify if the guess is in our word list
 
 // Here we should have our relation to access each state, and then add the color to each element
-function dyeLetters(GuessRating: WordleWordComparator, currentLetterElement: Element) {
+function dyeLetters(currentLetterState: string|undefined , currentLetterElement: Element) {
 const LetterElement = currentLetterElement
-let i=0
-const state = GuessRating[i]
+
+const state = currentLetterState
 if (state == "Correct") {
     LetterElement.classList.add(CORRECT)
 }
@@ -221,4 +224,10 @@ else if (state == "Misplaced") {
 else if (state == "Incorrect") { 
     LetterElement.classList.add(INCORRECT) 
 } 
+else {
+    console.warn("An unexpected error happened")
+}
 };
+
+initBoard();
+handleUserInput();
