@@ -37,6 +37,13 @@ body {
     font-weight: bold;
 }
 
+.message-container p {
+    background-color: #818384;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 0;
+}
+
 .tile.flip {
     animation: 0.5s linear flipping;
 }
@@ -44,5 +51,14 @@ body {
 .green-overlay {
     background-color: #538d4e !important;
     border:none !important;
+}
 
+.grey-overlay {
+    background-color: lightgray !important;
+    border: none !important;
+}
+
+.yellow-overlay {
+    background-color: #b59f3a ! important;
+    border: none !important;
 }

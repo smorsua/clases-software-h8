@@ -5,25 +5,24 @@ type LetterRating = {
     state: LetterState;
 };
 
-// Se crea un tipo que se llama WordRating. Esto es un array que se compone de dos partes: la letra y su estado.
 type WordRating = LetterRating[];
 
 const GUESSES = 5;
 const WORD_LENGTH = 5;
 const ROW_CLASS = "row";
+const LETTER_CLASS = "letter";
 let currentRowIndex = 0;
 let currentLetterIndex = 0;
 let nextLetterIndex = 0;
 var currentGuess:string[] = [];
+const solution = ["I", "N", "P", "U", "T"];
 
 export class WordleWordComparator {
 
-    //Se crean dos mapas para recorrer la palabra de la solución y la del input
     private userInputLetterToCount!: Map<string, number>;
     private solutionLetterToCount!: Map<string, number>;
 
-    //Se crea una variable de tipo WordRating
-    private finalRating!: WordRating;
+    public finalRating!: WordRating;
 
     constructor() {}
 
@@ -37,12 +36,13 @@ export class WordleWordComparator {
         }));
     }
 
-    private checkCorrectLetters(userInputArr: string[], solutionArr: string[]): void { 
+    public checkCorrectLetters(userInputArr: string[], solutionArr: string[]) { 
         //Check for correct letters. Para estas letras, el estado de la palabra en WordRating es de "Correct"
         for (let i = 0; i < userInputArr.length; i++) {
             if (solutionArr[i] == userInputArr[i]){
                 this.finalRating[i].state = "Correct";
                 this.increaseUserLetterCount(userInputArr[i]);
+                return this.finalRating;
             }
             }
         }
@@ -54,7 +54,7 @@ export class WordleWordComparator {
     }
     }
 
-    private isMisplacedOrIncorrect(userLetter: string){
+    public isMisplacedOrIncorrect(userLetter: string){
         if (!this.solutionLetterToCount.has(userLetter)) {
             return "Incorrect";
         }
@@ -97,6 +97,8 @@ export class WordleWordComparator {
         }
     }
 }
+
+const processWord = new WordleWordComparator();
 
 function allowInput() {
     while (GUESSES > 0) {
@@ -162,20 +164,37 @@ function deleteLetter() {
 }
 
 function enterWord() {
-    const word = currentGuess.join('');
-    const processWord = new WordleWordComparator();
     const rows = document.getElementsByClassName(ROW_CLASS);
     const currentRow = rows[currentRowIndex++];
     nextLetterIndex = 0;
+    loopForColors();
 }
 
-function colorLetter() {
+function loopForColors() {
+    for (let i = 0; i < 4; i++) {
+        colorLetter(i);
+    }
+}
+
+function colorLetter(currentIndex: number) {
+    const word = currentGuess.join('');
     const letter = document.getElementsByClassName(LETTER_CLASS);
-    const currentLetter = letter[currentLetterIndex];
-    currentLetter.classList.add('green-overlay');
+    const currentLetter = letter[currentIndex];
+    const content = currentLetter.textContent;
+    const correct = processWord.checkCorrectLetters(currentGuess, solution);
+    const other = processWord.isMisplacedOrIncorrect(word);
+    if (correct == 'Correct') {
+        currentLetter.classList.add('green-overlay');
+    }
+    else if (other == 'Incorrect' ) {
+        currentLetter.classList.add('grey-overlay')
+    }
+    else {
+        currentLetter.classList.add('yellow-overlay')
+    }       
 }
 
 
 initBoard();
 allowInput();
-colorLetter();
+loopForColors();
