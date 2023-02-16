@@ -10,7 +10,8 @@ function getFile(): Promise<string> {
 console.log("Starting request");
 
 const file = getFile().then((value) => {
-    return console.log(value);
+     console.log(value);
+     return value
 });
 
 console.log(file);
