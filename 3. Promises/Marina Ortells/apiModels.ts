@@ -3,7 +3,7 @@
 /**
  * PREGUNTAS:
  * como hacer el documento aparte con todos los valores y así no tneer que buscar
- * como pasar este file a javascript
+ 
  * 
  * COSAS QUE ME FALTAN:
  * 
