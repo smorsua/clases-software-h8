@@ -1,4 +1,4 @@
-type Poke_Api_types = {
+export type Poke_Api_types = {
     abilities: {
         ability: [Object];
         is_hidden: boolean;

@@ -1,4 +1,4 @@
-type Pokemon = {
+export type Pokemon = {
     name: string;
     id: number;
     stats: Stats;
@@ -11,8 +11,8 @@ type Pokemon = {
 type Stats = {
     attack: number;
     defense: number;
-    speedAtk: number;
-    speedDef: number;
+    specialAtk: number;
+    specialDef: number;
     speed: number;
     health: number;
 };
@@ -26,3 +26,7 @@ type Ability = {
     name: string;
     description: string;
 };
+
+//type AbilityAPI = {
+//    name:string;
+//}
