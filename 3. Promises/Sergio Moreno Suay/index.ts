@@ -38,30 +38,15 @@ button.onclick = (ev) => {
 const DICTIONARY_API_URL = "https://api.dictionaryapi.dev/api/v2";
 
 function fetchWordEntries(word: string) {
-    return fetch(`${DICTIONARY_API_URL}/entries/en/${word}`).then((res) => {
-        return res.json();
-    });
-}
+    return fetch(`${DICTIONARY_API_URL}/entries/en/${word}`)
+        .then((res) => res.json());
+};
+
 
 function updateView(word: string, entries: any[]) {
     if (entries.length == 0) {
         return;
     }
 
-    titleElement.textContent = word.charAt(0).toUpperCase() + word.slice(1);
-
-    if (entries instanceof Array) {
-        definitionElement.textContent =
-            entries[0].meanings[0].definitions[0].definition;
-        phoneticsElement.textContent = entries[0].phonetic;
-    } else {
-        definitionElement.textContent = "Definition not found";
-        phoneticsElement.textContent = "";
-    }
-}
-
-function test(word: string) {
-    fetchWordEntries(word).then((entries) => {
-        updateView(word, entries);
-    });
+    
 }

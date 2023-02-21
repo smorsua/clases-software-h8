@@ -1,6 +1,6 @@
 
 
-type Pokemon = {
+export type Pokemon = {
     name: string;
     photo: string;
     level: number;
@@ -8,7 +8,7 @@ type Pokemon = {
     ability: Ability;
 }
 
-type Stats = {
+export type Stats = {
     health: number;
     attack: number;
     defense: number;
@@ -16,11 +16,16 @@ type Stats = {
     speedDefense: number;
     speed: number;
     experiencePoints: number;
-    nextLevelExperiencePoints: number;
 }
 
-type Ability = {
+export type Ability = {
     name: string;
     description: string;
 }
 
+
+
+// handleclick
+// update version
+// HTML HECHO
+// CSS hacer
