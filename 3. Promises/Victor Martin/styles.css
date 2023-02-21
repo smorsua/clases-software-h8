@@ -1,0 +1,106 @@
+html {
+    background-color: antiquewhite;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pantalla {
+    width: 500px;
+    height: fit-content;
+    border-radius: 1rem;
+    background-color: rgb(245, 234, 88);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.supbar {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+    height: fit-content;
+    border-radius: 1rem;
+    align-items: end;
+    justify-content: space-evenly;
+}
+.img_stats {
+    display: flex;
+    flex-direction: row;
+}
+
+.pokemonSprite {
+    background-color: rgb(201, 77, 201);
+    width: 250px;
+    height: 150px;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.stats {
+    background-color: rgba(90, 239, 231, 0.732);
+    width: 250px;
+    height: 150px;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.expInfo {
+    background-color: rgba(90, 239, 231, 0.732);
+    width: 435px;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.ability {
+    background-color: rgba(90, 239, 231, 0.732);
+    width: 435px;
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+h2 {
+    color: black;
+    font-size: larger;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    margin-top: 0px;
+}
+
+h3 {
+    color: black;
+    font-size: small;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+        sans-serif;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+button {
+    background-color: rgb(48, 170, 231);
+    color: white;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0 1rem;
+    font-size: 1.5rem;
+    box-shadow: 0px 10px 15px -3px rgba(144, 133, 103, 0.1);
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(1.05);
+}
