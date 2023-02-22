@@ -15,10 +15,13 @@ body {
 
 h1 {
     margin: 1;
+    text-align: center;
 }
 
 h3 {
     margin: 0;
+    justify-content: center;
+    text-align: center;
     color:rgb(211, 101, 4);
 }
 
@@ -36,11 +39,10 @@ img {
     gap: 2rem;
 }
 
-.card {
+.console {
     width: 400px;
     height: 300px;
     border-radius: 1rem;
-    background-color: rgb(202, 229, 234);
     padding: 3rem;
     box-shadow: 0px 10px 15px -3px rgba(103, 122, 144, 0.1);
 }
