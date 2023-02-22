@@ -26,7 +26,7 @@ function fetchPokemon(name: string): Promise<PokeAPIInfo> {
         });
 }
 
-export function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
+export async function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
     const stats: Stats = {
         health: 0,
         attack: 0,
@@ -73,7 +73,9 @@ export function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
 
     return fetch(info.abilities[0].ability.url)
         .then((res) => res.json())
-        .then((pokeData) => {
+        .then((pokeData: /*PONERLE UN TIPO, A LO MEJOR TIENES QUE CREAR UN PokeAPIAbilityInfo o algo asi*/) => {
+            ability.description = pokeData. //ACCEDER A LA PROPIEDAD QUE HAGA FALTA
+
             const pokemon: Pokemon = {
                 name: "", //AQUÍ!!!
                 photo: info.sprites.front_default,

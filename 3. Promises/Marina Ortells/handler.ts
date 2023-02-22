@@ -37,9 +37,13 @@ export class PokedexViewHandler {
 
             fetch(apiUrl)
             .then(response => response.json())
-            .then(data: PokeAPIInfo => {
-                const pokemon = pokeAPIToModels(data);
-                
+            .then((data: PokeAPIInfo) => {
+                //pokeAPIModels, dentro, devuelve una promesa. Si yo la devuelvo aqui puedo usar
+                // el valor en el siguiente .then()
+                // Es como con lo de response.json() que hay mas arriba (recuerda que como
+                // no hay llaves se esta devolviendo). En ese caso, el valor se mete en data
+                return pokeAPIToModels(data);                            
+            }).then((pokemon: Pokemon)=>{
                 // Update HTML elements with Pokemon data
                 this.nameInput.textContent = pokemon.name;
                 this.pokemonLevel.textContent = String(pokemon.level);
