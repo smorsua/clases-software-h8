@@ -51,7 +51,7 @@ export class PokedexViewHandler {
                 this.pokemonSpeed.textContent = String(pokemon.stats.speed);
                 this.pokemonAbilityName.textContent = pokemon.ability.name;
                 this.pokemonAbilityDescription.textContent = pokemon.ability.description;
-            })
+            });
         };
       
 }
