@@ -2,6 +2,7 @@ export type PokeAPIInfo = {
     stats: PokeAPIStats;
     abilities: PokeAPIAbilities;
     sprites: PokeAPISprites;
+    abilitiesInfo: PokeAPIAbilityInfo;
 };
 
 type PokeAPIStats = PokeAPIExpandedStat[];
@@ -18,7 +19,11 @@ type PokeAPIExpandedAbility = {
     ability: PokeAPIAbility;
 };
 
-type PokeAPIAbility = { name: string; url: string };
+export type PokeAPIAbilityInfo = { 
+    description: string;
+};
+
+type PokeAPIAbility = { name: string; url: string};
 
 type PokeAPISprites = {
     front_default: string;
