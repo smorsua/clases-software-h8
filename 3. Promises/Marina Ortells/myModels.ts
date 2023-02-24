@@ -12,8 +12,8 @@ export type Stats = {
     health: number;
     attack: number;
     defense: number;
-    speedAttack: number;
-    speedDefense: number;
+    specialAttack: number;
+    specialDefense: number;
     speed: number;
     experiencePoints: number;
 }
@@ -22,10 +22,3 @@ export type Ability = {
     name: string;
     description: string;
 }
-
-
-
-// handleclick
-// update version
-// HTML HECHO
-// CSS hacer

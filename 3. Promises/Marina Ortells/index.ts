@@ -2,6 +2,12 @@ import { Pokemon } from "./myModels";
 import { Stats } from "./myModels";
 import { PokeAPIInfo } from "./apiModels";
 import { PokedexViewHandler } from "./handler";
+import { PokeAPIAbilityInfo } from "./apiModels";
+
+    const goPokemon = new PokedexViewHandler();
+
+    goPokemon.handleClick();
+
 
 function fetchPokemon(name: string): Promise<PokeAPIInfo> {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -22,7 +28,12 @@ function fetchPokemon(name: string): Promise<PokeAPIInfo> {
             const sprites = {
                 front_default: data.sprites.front_default,
             };
-            return { name, stats, abilities, sprites };
+
+            const abilitiesInfo = {
+                description: data.abilitiesInfo.description,
+            }
+
+            return { name, stats, abilities, sprites, abilitiesInfo };
         });
 }
 
@@ -31,8 +42,8 @@ export async function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
         health: 0,
         attack: 0,
         defense: 0,
-        speedAttack: 0,
-        speedDefense: 0,
+        specialAttack: 0,
+        specialDefense: 0,
         speed: 0,
         experiencePoints: 0,
     };
@@ -49,12 +60,12 @@ export async function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
                 stats.defense = parseInt(stat.stat.url.split("/").slice(-1)[0]);
                 break;
             case "special-attack":
-                stats.speedAttack = parseInt(
+                stats.specialAttack = parseInt(
                     stat.stat.url.split("/").slice(-1)[0]
                 );
                 break;
             case "special-defense":
-                stats.speedDefense = parseInt(
+                stats.specialDefense = parseInt(
                     stat.stat.url.split("/").slice(-1)[0]
                 );
                 break;
@@ -73,11 +84,10 @@ export async function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
 
     return fetch(info.abilities[0].ability.url)
         .then((res) => res.json())
-        .then((pokeData: /*PONERLE UN TIPO, A LO MEJOR TIENES QUE CREAR UN PokeAPIAbilityInfo o algo asi*/) => {
-            ability.description = pokeData. //ACCEDER A LA PROPIEDAD QUE HAGA FALTA
-
+        .then((pokeData: PokeAPIAbilityInfo) => {
+            ability.description = pokeData.description;
             const pokemon: Pokemon = {
-                name: "", //AQUÍ!!!
+                name: fetchPokemon.name,
                 photo: info.sprites.front_default,
                 level: 5,
                 stats: stats,
@@ -85,4 +95,8 @@ export async function pokeAPIToModels(info: PokeAPIInfo): Promise<Pokemon> {
             };
             return pokemon;
         });
+        
+        
+        
+        
 }
