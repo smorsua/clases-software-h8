@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 const POKE_API_URL = "https://pokeapi.co/api/v2";
 //Elementos Info Pokemon
 const pokemonName = document.getElementById("pokemonName");
@@ -30,7 +28,7 @@ button.onclick = (ev) => {
     }
 };
 function fetchPokemon(name) {
-    fetch(`${POKE_API_URL}/pokemon/${name}`).then((res) => {
+    return fetch(`${POKE_API_URL}/pokemon/${name}`).then((res) => {
         return res.json();
     });
 }
@@ -82,3 +80,4 @@ function displayPokeInfo(name) {
         updateData(name, pokemonInfo);
     });
 }
+export {};
