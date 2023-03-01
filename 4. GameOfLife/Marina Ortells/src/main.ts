@@ -1,10 +1,7 @@
 export {};
 import { Grid } from "./types";
 
-
-
 export class GridHandler {
-
     private canvas: HTMLCanvasElement;
     private grid: Grid;
     private ctx: CanvasRenderingContext2D;
@@ -18,56 +15,68 @@ export class GridHandler {
     }
 
     public drawLightGrid() {
-        this.ctx.strokeStyle = 'white';
+        this.ctx.strokeStyle = "white";
         this.drawGrid();
     }
 
-     public drawGrid() {
-
+    public drawGrid() {
         const cellWidth = this.grid.cell.width;
         const cellHeight = this.grid.cell.height;
 
         for (let i = 0; i < this.grid.rows; i++) {
             for (let j = 0; j < this.grid.columns; j++) {
-                this.ctx.strokeRect(j * cellWidth, i * cellHeight, cellWidth, cellHeight);
-                
+                this.ctx.strokeRect(
+                    j * cellWidth,
+                    i * cellHeight,
+                    cellWidth,
+                    cellHeight
+                );
             }
         }
     }
 
     public handleClick() {
         canvas.addEventListener("click", (ev) => {
-            
             const x = ev.clientX - canvas.offsetLeft;
             const y = ev.clientY - canvas.offsetTop;
 
             const cellWidth = this.grid.cell.width;
             const cellHeight = this.grid.cell.height;
 
-            const row = Math.floor (y / cellWidth);
-            const column = Math.floor (x / cellHeight) + 1;
-
+            const row = Math.floor(y / cellWidth);
+            const column = Math.floor(x / cellHeight) + 1;
 
             if (grid.cell.isAlive == false) {
                 this.ctx.fillStyle = "yellow";
-                this.ctx.fillRect(column * cellWidth, row * cellHeight, cellWidth, cellHeight);
+                this.ctx.fillRect(
+                    column * cellWidth,
+                    row * cellHeight,
+                    cellWidth,
+                    cellHeight
+                );
                 grid.cell.isAlive = true;
-            }
-            else if (grid.cell.isAlive == true) {
-                this.ctx.clearRect(column * cellWidth, row * cellHeight, cellWidth, cellHeight);
-                this.ctx.strokeStyle = 'white';
+            } else if (grid.cell.isAlive == true) {
+                this.ctx.clearRect(
+                    column * cellWidth,
+                    row * cellHeight,
+                    cellWidth,
+                    cellHeight
+                );
+                this.ctx.strokeStyle = "white";
                 grid.cell.isAlive = false;
             }
-        })
+        });
     }
-
 }
 
-
-        const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
-        const grid: Grid = { rows: 20, columns: 20, width: 500, height: 500, cell: {width: 0, height: 0, isAlive: false} };
-        const gridHandler = new GridHandler(canvas, grid);
-        gridHandler.drawLightGrid();
-        gridHandler.handleClick();
-
-
+const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+const grid: Grid = {
+    rows: 20,
+    columns: 20,
+    width: 500,
+    height: 500,
+    cell: { width: 0, height: 0, isAlive: false },
+};
+const gridHandler = new GridHandler(canvas, grid);
+gridHandler.drawLightGrid();
+gridHandler.handleClick();
