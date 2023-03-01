@@ -37,9 +37,20 @@ export class GridHandler {
 
     public handleClick() {
         canvas.addEventListener("click", (ev) => {
-            const clickCellX = ev.clientX - canvas.offsetLeft;
-            const clickCellY = ev.clientY - canvas.offsetTop;
+            
+            const x = ev.clientX - canvas.offsetLeft;
+            const y = ev.clientY - canvas.offsetTop;
 
+            const cellWidth = this.grid.cell.width;
+            const cellHeight = this.grid.cell.height;
+
+            const row = Math.floor (y / cellWidth);
+            const column = Math.floor (x / cellHeight);
+
+            // fill the color
+            this.ctx.fillStyle = "yellow";
+
+            this.ctx.fillRect(column * cellWidth, row * cellHeight, cellWidth, cellHeight);
             
         })
     }
@@ -51,6 +62,7 @@ export class GridHandler {
         const grid: Grid = { rows: 20, columns: 20, width: 500, height: 500, cell: {width: 0, height: 0, isAlive: false} };
         const gridHandler = new GridHandler(canvas, grid);
         gridHandler.drawLightGrid();
+        gridHandler.handleClick();
 
 
 /**
