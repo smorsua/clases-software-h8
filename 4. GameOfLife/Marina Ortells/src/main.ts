@@ -18,7 +18,7 @@ export class GridHandler {
     }
 
     public drawLightGrid() {
-        this.ctx.strokeStyle = '#CCCCCC';
+        this.ctx.strokeStyle = 'white';
         this.drawGrid();
     }
 
@@ -45,13 +45,19 @@ export class GridHandler {
             const cellHeight = this.grid.cell.height;
 
             const row = Math.floor (y / cellWidth);
-            const column = Math.floor (x / cellHeight);
+            const column = Math.floor (x / cellHeight) + 1;
 
-            // fill the color
-            this.ctx.fillStyle = "yellow";
 
-            this.ctx.fillRect(column * cellWidth, row * cellHeight, cellWidth, cellHeight);
-            
+            if (grid.cell.isAlive == false) {
+                this.ctx.fillStyle = "yellow";
+                this.ctx.fillRect(column * cellWidth, row * cellHeight, cellWidth, cellHeight);
+                grid.cell.isAlive = true;
+            }
+            else if (grid.cell.isAlive == true) {
+                this.ctx.clearRect(column * cellWidth, row * cellHeight, cellWidth, cellHeight);
+                this.ctx.strokeStyle = 'white';
+                grid.cell.isAlive = false;
+            }
         })
     }
 
@@ -63,42 +69,5 @@ export class GridHandler {
         const gridHandler = new GridHandler(canvas, grid);
         gridHandler.drawLightGrid();
         gridHandler.handleClick();
-
-
-/**
- * function handleClick() {
-    myCanvas.addEventListener("click", (ev) => {
-        // get the position of the mouse
-        const x = ev.clientX - myCanvas.offsetLeft;
-        const y = ev.clientY - myCanvas.offsetTop;
-
-        // fill the color
-        ctx.fillStyle = "yellow";
-
-        // draw the point
-        ctx.beginPath();
-        ctx.arc(x, y, 2, 0, Math.PI * 2);
-        ctx.fill();
-    });
-}
-
-handleClick();
-
-/** ctx.fillStyle = "yellow";
-
-ctx.fillRect(0, 0, myCanvas.width, myCanvas.height);
-
-
-
-const change = setInterval(drawRandomRect, 500)
-
-function drawRandomRect() {
-  
-  
-}
-
-//fill, stroke
-
-*/
 
 
