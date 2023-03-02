@@ -1,6 +1,8 @@
 export {};
 import { GridHandler } from "./gridhandler";
 
+
+//Poner en global
 export class InitialState {
     public gridHandler: GridHandler;
     //public row: number;
@@ -48,27 +50,6 @@ export class InitialState {
 
             // MOVE TO GAMEOFLIFE
 
-            const surroundingCells = [
-                [row - 1, column - 1],
-                [row - 1, column],
-                [row - 1, column + 1],
-                [row, column - 1],
-                [row, column + 1],
-                [row + 1, column - 1],
-                [row + 1, column],
-                [row + 1, column + 1],
-            ];
-
-            const surroudingState = surroundingCells.map(([row, column]) => {
-                if (
-                    row >= 0 &&
-                    row < this.gridHandler.grid.rows &&
-                    column >= 0 &&
-                    column < this.gridHandler.grid.columns
-                ) {
-                    return this.gridHandler.grid.cell[row][column].isAlive; //se necesita que sea - cell: Cell[][]
-                } return false;
-            });
         });
     }
 }

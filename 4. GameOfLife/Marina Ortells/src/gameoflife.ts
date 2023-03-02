@@ -1,7 +1,7 @@
 export {};
 import {GridHandler} from "./gridhandler";
 import { InitialState } from "./initialState";
-import { Grid } from "./types";
+import { Cell, Grid } from "./types";
 
 
 /**
@@ -10,12 +10,13 @@ import { Grid } from "./types";
  */
 
 
+
 export class GameOfLife {
     private grid: Grid;
-    private initialState: InitialState;
+    private state: Cell[][];
 
-    constructor(initialState: InitialState, grid: Grid) {
-        this.initialState = initialState;
+    constructor(initialState: Cell[][], grid: Grid) {
+        this.state = initialState;
         this.grid = grid;
     }
 
@@ -32,6 +33,31 @@ export class GameOfLife {
          */
 
 
+
+
+        const surroundingCells = [
+            [row - 1, column - 1],
+            [row - 1, column],
+            [row - 1, column + 1],
+            [row, column - 1],
+            [row, column + 1],
+            [row + 1, column - 1],
+            [row + 1, column],
+            [row + 1, column + 1],
+        ];
+
+        // cambiar a dos fors
+
+        const surroudingState = surroundingCells.map(([row, column]) => {
+            if (
+                row >= 0 &&
+                row < this.gridHandler.grid.rows &&
+                column >= 0 &&
+                column < this.gridHandler.grid.columns
+            ) {
+                return this.gridHandler.grid.cell[row][column].isAlive; //se necesita que sea - cell: Cell[][]
+            } return false;
+        });
         
         
 

@@ -1,17 +1,19 @@
 export {};
-import { Grid } from "./types";
+import { GridConfig } from "./types";
 import { InitialState } from "./initialState";
 
 export class GridHandler {
     public canvas: HTMLCanvasElement;
-    public grid: Grid;
+    public gridConfig: GridConfig;
+    private cellWidth: number;
+    private cellHeight: number;
+
     public ctx: CanvasRenderingContext2D;
 
-    constructor(canvas: HTMLCanvasElement, grid: Grid) {
+    constructor(canvas: HTMLCanvasElement, gridConfig: GridConfig) {
         this.canvas = canvas;
-        this.grid = grid;
-        this.grid.cell.width = this.grid.width / this.grid.columns;
-        this.grid.cell.height = this.grid.height / this.grid.rows;
+        this.gridConfig = gridConfig;
+        //cellWidth y cellheight
         this.ctx = canvas.getContext("2d")!;
     }
 
@@ -21,12 +23,12 @@ export class GridHandler {
     }
 
     public drawGrid() {
-        const cellWidth = this.grid.cell.width;
-        const cellHeight = this.grid.cell.height;
+        const cellWidth = this.grid.width;
+        const cellHeight = this.grid.height;
 
         for (let i = 0; i < this.grid.rows; i++) {
             for (let j = 0; j < this.grid.columns; j++) {
-                this.ctx.strokeRect(
+                this.ctx.fillRect(
                     j * cellWidth,
                     i * cellHeight,
                     cellWidth,
@@ -43,7 +45,7 @@ const grid: Grid = {
     columns: 20,
     width: 500,
     height: 500,
-    cell: { width: 0, height: 0, isAlive: false },
+    //cell: { width: 0, height: 0, isAlive: false },
 };
 
 const gridHandler = new GridHandler(canvas, grid);
