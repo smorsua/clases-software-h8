@@ -1,6 +1,5 @@
 export {};
 import { Grid } from "./types";
-//import { GameOfLife } from "./gameoflife";
 import { InitialState } from "./initialState";
 
 export class GridHandler {
@@ -36,9 +35,7 @@ export class GridHandler {
             }
         }
     }
-
 }
-
 
 const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 const grid: Grid = {
@@ -50,9 +47,8 @@ const grid: Grid = {
 };
 
 const gridHandler = new GridHandler(canvas, grid);
-//const initialState = new InitialState(gridHandler);
+const initialState = new InitialState(gridHandler);
+
 
 gridHandler.drawLightGrid();
-
-//const gameOfLife = new GameOfLife();
-//gameOfLife.handleClick();
+initialState.handleClick();
