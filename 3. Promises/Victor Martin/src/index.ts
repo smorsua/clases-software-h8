@@ -35,7 +35,7 @@ import { Pokemon } from "./models";
 import { Poke_Api_types } from "./addapters";
 
 function fetchPokemon(name: string) {
-    fetch(`${POKE_API_URL}/pokemon/${name}`).then((res) => {
+    return fetch(`${POKE_API_URL}/pokemon/${name}`).then((res) => {
         return res.json();
     });
 }
