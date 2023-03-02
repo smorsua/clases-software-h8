@@ -1,2 +1,0 @@
-export {};
-import * from "./main";
