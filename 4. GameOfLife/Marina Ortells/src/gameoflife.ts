@@ -3,8 +3,6 @@ import { GridHandler } from "./gridhandler";
 //import { InitialState } from "./initialState";
 import { Cell, State } from "./types";
 
-
-
 function createInitialGrid() {
     const state: State = [];
 
@@ -64,14 +62,26 @@ function nextState(cell: Cell) {
             for (let j = 0; j < currentState[i].length; j++) {
                 const cellState = currentState[i][j].isAlive;
                 currentState[i][j].isAlive = cell.isAlive; //AQUÍ!!!!!!!!
-                console.log(currentState.length);
+                const cellWidth = gridHandler.cellWidth;
+                const cellHeight = gridHandler.cellHeight;
+                //const isCellGoingToLive = isCellGoingToLive(currentState, cellState, i, j);
                 isCellGoingToLive(currentState, cellState, i, j);
-        }
 
-    }});
+                if (isCellGoingToLive == true) {
+                    ctx.fillStyle = "yellow";
+                    ctx.fillRect(
+                        i * cellWidth,
+                        j * cellHeight,
+                        cellWidth,
+                        cellHeight
+                    );
+                }
+            }
+        }
+    });
 }
 
-const isCellGoingToLive = function isCellGoingToLive(
+function isCellGoingToLive(
     currentState: State,
     cell: Cell,
     row: number,
