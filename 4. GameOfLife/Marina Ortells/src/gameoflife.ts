@@ -63,7 +63,7 @@ function nextState(cell: Cell) {
         for (let i = 0; i < currentState.length; i++) {
             for (let j = 0; j < currentState[i].length; j++) {
                 const cellState = currentState[i][j].isAlive;
-                currentState[i][j].isAlive = cell.isAlive; //change
+                currentState[i][j].isAlive = cell.isAlive; //AQUÍ!!!!!!!!
                 console.log(currentState.length);
                 isCellGoingToLive(currentState, cellState, i, j);
         }
