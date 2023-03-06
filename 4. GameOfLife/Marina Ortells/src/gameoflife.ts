@@ -1,88 +1,113 @@
 export {};
-import {GridHandler} from "./gridhandler";
-import { InitialState } from "./initialState";
-import { Cell, Grid } from "./types";
-
-
-/**
- * GET THE ROW AND THE COLUMN FROM THE CLASS INITIALSTATE
- * 
- */
+import { GridHandler } from "./gridhandler";
+//import { InitialState } from "./initialState";
+import { Cell, State } from "./types";
 
 
 
-export class GameOfLife {
-    private grid: Grid;
-    private state: Cell[][];
+function createInitialGrid() {
+    const state: State = [];
 
-    constructor(initialState: Cell[][], grid: Grid) {
-        this.state = initialState;
-        this.grid = grid;
-    }
+    for (let i = 0; i < gridHandler.rows; i++) {
+        const row: Cell[] = [];
 
-    public nextState() {
-
-        /**
-         * get the value of the row and the column
-         * get the current state - OK
-         * get the surrounding cells
-         * get the state of surrouding cells
-         * set the rules of the game
-         * update drawing the grid
-         * 
-         */
-
-
-
-
-        const surroundingCells = [
-            [row - 1, column - 1],
-            [row - 1, column],
-            [row - 1, column + 1],
-            [row, column - 1],
-            [row, column + 1],
-            [row + 1, column - 1],
-            [row + 1, column],
-            [row + 1, column + 1],
-        ];
-
-        // cambiar a dos fors
-
-        const surroudingState = surroundingCells.map(([row, column]) => {
-            if (
-                row >= 0 &&
-                row < this.gridHandler.grid.rows &&
-                column >= 0 &&
-                column < this.gridHandler.grid.columns
-            ) {
-                return this.gridHandler.grid.cell[row][column].isAlive; //se necesita que sea - cell: Cell[][]
-            } return false;
-        });
-        
-        
-
-
-        if (this.grid.cell.isAlive == true) {
-
+        for (let j = 0; j < gridHandler.columns; j++) {
+            row.push({ isAlive: false });
         }
 
+        state.push(row);
     }
 
-
+    return state;
 }
 
+function handleClick(currentState: State) {
+    canvas.addEventListener("click", (ev) => {
+        const x = ev.clientX - canvas.offsetLeft;
+        const y = ev.clientY - canvas.offsetTop;
 
-// reglas del juego
-        /** *
-         * 
-         * if (cell isAlive == true) {
-         *      - will continue as true if 2 || 3 around are alive
-         *      - if not -> will die
-         * }
-         * 
-         * else {
-         *      - will revive if 3 around are alive
-         * }
-         * 
-         * 
-         */
+        const cellWidth = gridHandler.cellWidth;
+        const cellHeight = gridHandler.cellHeight;
+
+        const row = Math.floor(y / cellWidth);
+        const column = Math.floor(x / cellHeight + 1);
+
+        currentState[row][column];
+        const getCurrentState = currentState[row][column].isAlive;
+
+        if (getCurrentState == false) {
+            ctx.fillStyle = "yellow";
+            ctx.fillRect(
+                column * cellWidth,
+                row * cellHeight,
+                cellWidth,
+                cellHeight
+            );
+
+            currentState[row][column].isAlive = true;
+        } else if (getCurrentState == true) {
+            ctx.clearRect(
+                column * cellWidth,
+                row * cellHeight,
+                cellWidth,
+                cellHeight
+            );
+            currentState[row][column].isAlive = false;
+        }
+        //isCellGoingToLive(currentState, cell, row, column); //probably change
+    });
+}
+
+function nextState(cell: Cell) {
+    button.addEventListener("click", (ev) => {
+        for (let i = 0; i < currentState.length; i++) {
+            for (let j = 0; j < currentState[i].length; j++) {
+                const cellState = currentState[i][j].isAlive;
+                currentState[i][j].isAlive = cell.isAlive; //change
+                console.log(currentState.length);
+                isCellGoingToLive(currentState, cellState, i, j);
+        }
+
+    }});
+}
+
+const isCellGoingToLive = function isCellGoingToLive(
+    currentState: State,
+    cell: Cell,
+    row: number,
+    column: number
+): boolean {
+    const neighbors = [
+        currentState[row - 1][column - 1],
+        currentState[row - 1][column],
+        currentState[row - 1][column + 1],
+        currentState[row][column - 1],
+        currentState[row][column + 1],
+        currentState[row + 1][column - 1],
+        currentState[row + 1][column],
+        currentState[row + 1][column + 1],
+    ];
+
+    const aliveCount = neighbors.filter((neighbor) => neighbor.isAlive).length;
+    if (cell.isAlive) {
+        aliveCount == 2 || aliveCount == 3;
+    } else {
+        aliveCount == 3;
+    }
+
+    if ((aliveCount == 2 || aliveCount == 3) && cell.isAlive == true) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+const ctx = canvas.getContext("2d")!;
+const button = document.getElementById("buttonStart") as HTMLButtonElement;
+const gridHandler = new GridHandler(canvas, 10, 10);
+
+gridHandler.drawGrid();
+let currentState = createInitialGrid();
+handleClick(currentState);
+nextState();

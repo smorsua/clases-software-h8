@@ -1,7 +1,6 @@
 #app {
   width: 100vw;
   height: 100vh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,4 +10,33 @@
 
 #myCanvas {
   border: 1px solid black;
+}
+
+
+#buttonStart{
+  background-color: #dbc2ad;
+  font-size: 15px;
+  padding: 5px 12px;
+}
+
+#buttonStart:hover {
+  background-color: #d1b7a1;
+}
+
+#buttonStart:active {
+  transform: translateY(2px);
+}
+
+#buttonStop {
+  background-color: #dbc2ad;
+  font-size: 15px;
+  padding: 5px 12px;
+}
+
+#buttonStop:hover {
+  background-color:  #d1b7a1;
+}
+
+#buttonStop:active {
+  transform: translateY(2px);
 }

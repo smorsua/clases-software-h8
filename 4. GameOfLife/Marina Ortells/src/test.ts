@@ -6,8 +6,5 @@ type Cell = {
 
 type State = Cell[][]
 
-function nextState(state: State) {
-    for(let i = 0)
-}
 
 export {}
