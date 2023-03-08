@@ -21,8 +21,7 @@ button.onclick = (ev) => {
     const name = nameInput.value.toLowerCase();
     if (name == "") {
         return;
-    }
-    else {
+    } else {
         pokemonName.textContent = name;
         displayPokeInfo(name);
     }
@@ -35,8 +34,7 @@ function fetchPokemon(name) {
 function updateData(name, pokemonInfo) {
     if (pokemonInfo.length == 0) {
         return;
-    }
-    else {
+    } else {
         pokemonName.textContent = name.charAt(0).toUpperCase() + name.slice(1);
         if (pokemonInfo instanceof Array) {
             pokemonid.textContent = pokemonInfo[0].id[0];
@@ -56,21 +54,20 @@ function updateData(name, pokemonInfo) {
             abilityName.textContent = pokemonInfo[0].abilities[0].ability[0];
             abilityDescription.textContent =
                 pokemonInfo[0].abilities[0].ability[1];
-        }
-        else {
-            pokemonid.textContent = "";
-            pokemonLevel.textContent = "";
-            pokemonSprite.textContent = "";
-            healthLine.textContent = "";
-            attackLine.textContent = "";
-            defenseLine.textContent = "";
-            specialAtkLine.textContent = "";
-            specialDefLine.textContent = "";
-            speedLine.textContent = "";
-            currentExpInfo.textContent = "";
-            nextLevelExpInfo.textContent = "";
-            abilityName.textContent = "";
-            abilityDescription.textContent = "";
+        } else {
+            pokemonid.textContent = "Default";
+            pokemonLevel.textContent = "Default";
+            pokemonSprite.textContent = "Image not Found";
+            healthLine.textContent = "Default";
+            attackLine.textContent = "Default";
+            defenseLine.textContent = "Default";
+            specialAtkLine.textContent = "Default";
+            specialDefLine.textContent = "Default";
+            speedLine.textContent = "Default";
+            currentExpInfo.textContent = "Default";
+            nextLevelExpInfo.textContent = "Default";
+            abilityName.textContent = "Default";
+            abilityDescription.textContent = "Default";
         }
     }
 }
