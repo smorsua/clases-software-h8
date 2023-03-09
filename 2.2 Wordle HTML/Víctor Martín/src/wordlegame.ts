@@ -7,6 +7,76 @@ const CORRECT = "correct";
 const MISPLACED = "misplaced";
 const INCORRECT = "incorrect";
 
+const wordleWords = [
+    "cigar",
+    "rebut",
+    "sissy",
+    "humph",
+    "awake",
+    "blush",
+    "focal",
+    "evade",
+    "naval",
+    "serve",
+    "heath",
+    "dwarf",
+    "model",
+    "karma",
+    "stink",
+    "grade",
+    "quiet",
+    "bench",
+    "abate",
+    "feign",
+    "major",
+    "death",
+    "fresh",
+    "crust",
+    "stool",
+    "colon",
+    "abase",
+    "marry",
+    "react",
+    "batty",
+    "pride",
+    "floss",
+    "helix",
+    "croak",
+    "staff",
+    "paper",
+    "unfed",
+    "whelp",
+    "trawl",
+    "outdo",
+    "adobe",
+    "crazy",
+    "sower",
+    "repay",
+    "digit",
+    "crate",
+    "cluck",
+    "spike",
+    "mimic",
+    "pound",
+    "maxim",
+    "linen",
+    "unmet",
+    "flesh",
+    "booby",
+    "forth",
+    "first",
+    "stand",
+    "belly",
+    "ivory",
+    "seedy",
+    "print",
+    "yearn",
+    "drain",
+    "bribe",
+    "stout",
+    "panel",
+];
+
 let nextLetterIndex = 0;
 let currentRowIndex = 0;
 var currentGuess: string[] = [];
@@ -41,7 +111,7 @@ export class WordleWordComparator {
         this.checkCorrectLetters(currentGuess, solutionArr);
         return this.finalRating;
     }
-
+    // Hay que volver a poner las correctas antes, de modo que ponga primero las verdes y luego no deje poner amarillas si en la sol no se repiten
     private checkCorrectLetters(currentGuess: string[], solutionArr: string[]) {
         for (let i = 0; i < WORD_LENGTH; i++) {
             if (currentGuess[i] == solutionArr[i]) {
@@ -106,75 +176,6 @@ export class WordleWordComparator {
 
 // We start with a Solution selector
 function chooseSolution() {
-    const wordleWords = [
-        "cigar",
-        "rebut",
-        "sissy",
-        "humph",
-        "awake",
-        "blush",
-        "focal",
-        "evade",
-        "naval",
-        "serve",
-        "heath",
-        "dwarf",
-        "model",
-        "karma",
-        "stink",
-        "grade",
-        "quiet",
-        "bench",
-        "abate",
-        "feign",
-        "major",
-        "death",
-        "fresh",
-        "crust",
-        "stool",
-        "colon",
-        "abase",
-        "marry",
-        "react",
-        "batty",
-        "pride",
-        "floss",
-        "helix",
-        "croak",
-        "staff",
-        "paper",
-        "unfed",
-        "whelp",
-        "trawl",
-        "outdo",
-        "adobe",
-        "crazy",
-        "sower",
-        "repay",
-        "digit",
-        "crate",
-        "cluck",
-        "spike",
-        "mimic",
-        "pound",
-        "maxim",
-        "linen",
-        "unmet",
-        "flesh",
-        "booby",
-        "forth",
-        "first",
-        "stand",
-        "belly",
-        "ivory",
-        "seedy",
-        "print",
-        "yearn",
-        "drain",
-        "bribe",
-        "stout",
-        "panel",
-    ];
     const solutionIndex = Math.floor(Math.random() * wordleWords.length);
     let solution = wordleWords[solutionIndex];
     return solution.toUpperCase();
@@ -245,13 +246,14 @@ function deleteLetter() {
 // For the enter, we evaluate the guess and get our Word Review, using the previous class
 function handleEnter() {
     const finalRating = wordleWordComparator.getWordRating(currentGuess);
-    if (nextLetterIndex == WORD_LENGTH) {
+    const answer = currentGuess.join("").toLowerCase();
+    if (wordleWords.includes(answer)) {
         updateView(finalRating);
         currentRowIndex++;
         nextLetterIndex = 0;
         currentGuess = [];
     } else {
-        console.warn(`The answer must have a ${WORD_LENGTH} character length`);
+        console.warn(`Your answer is not included in the solution list`);
     }
 } // In here we need to state the currentLetterElement in a loop in order to dye each square
 
