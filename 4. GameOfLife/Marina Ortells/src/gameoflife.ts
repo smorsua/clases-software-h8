@@ -3,9 +3,7 @@ import { GridHandler } from "./gridhandler";
 //import { InitialState } from "./initialState";
 import { Cell, State } from "./types";
 
-
-
-function createInitialGrid() {
+function createInitialGrid(): State {
     const state: State = [];
 
     for (let i = 0; i < gridHandler.rows; i++) {
@@ -21,12 +19,10 @@ function createInitialGrid() {
     return state;
 }
 
-
 function handleClick(currentState: State) {
-    const state: State = [];
-    canvas.addEventListener("click", (ev) => {
-        const x = ev.clientX - canvas.offsetLeft;
-        const y = ev.clientY - canvas.offsetTop;
+    canvas.onclick = (ev) => {
+        const x = ev.clientX - canvas.getBoundingClientRect().left;
+        const y = ev.clientY - canvas.getBoundingClientRect().top;
 
         const cellWidth = gridHandler.cellWidth;
         const cellHeight = gridHandler.cellHeight;
@@ -46,7 +42,6 @@ function handleClick(currentState: State) {
             );
 
             currentState[row][column].isAlive = true;
-            const value 
         } else if (getCurrentState == true) {
             ctx.clearRect(
                 column * cellWidth,
@@ -56,51 +51,41 @@ function handleClick(currentState: State) {
             );
             currentState[row][column].isAlive = false;
         }
-    });
+    };
 }
+function nextState(currentState: State): State {
+    const state: Cell[][] = [];
 
-function nextState() {  
-    const state: State = [];
-   
-        for (let i = 0; i < currentState.length; i++) {
-            const nextstate: Cell[] = [];
-            for (let j = 0; j < currentState[i].length; j++) {  
-                nextstate.push({isAlive:isCellGoingToLive(currentState, cellState, i, j)})              
-                const cellState = currentState[i][j].isAlive;
-            }
-    }};
-                
-                /*
-                const cellWidth = gridHandler.cellWidth;
-                const cellHeight = gridHandler.cellHeight;
-
-                const cellState = isCellGoingToLive(currentState, currentState[i][j], i, j);
-                
-                if (cellState == true) {
-                    ctx.fillStyle = "red";
-                    ctx.fillRect(
-                        i * cellWidth,
-                        j * cellHeight,
-                        cellWidth,
-                        cellHeight
-                    );
-                }
-                else {
-                    ctx.fillStyle = "yellow";
-                    ctx.fillRect(
-                        i * cellWidth,
-                        j * cellHeight,
-                        cellWidth,
-                        cellHeight
-                    );
-                }
- */
+    for (let i = 0; i < currentState.length; i++) {
+        const row: Cell[] = [];
+        for (let j = 0; j < currentState[i].length; j++) {
+            row.push({
+                isAlive: isCellGoingToLive(
+                    currentState,
+                    currentState[i][j],
+                    i,
+                    j
+                ),
+            });
+        }
+        state.push(row);
+    }
+    return state;
+}
 function isCellGoingToLive(
     currentState: State,
     cell: Cell,
     row: number,
     column: number
 ): boolean {
+    if (
+        row == 0 ||
+        row == currentState.length - 1 ||
+        column == 0 ||
+        column == currentState.length - 1
+    ) {
+        return false;
+    }
     const neighbors = [
         currentState[row - 1][column - 1],
         currentState[row - 1][column],
@@ -114,30 +99,29 @@ function isCellGoingToLive(
 
     const aliveCount = neighbors.filter((neighbor) => neighbor.isAlive).length;
     if (cell.isAlive) {
-        aliveCount == 2 || aliveCount == 3;
+        return aliveCount == 2 || aliveCount == 3;
     } else {
-        aliveCount == 3;
+        return aliveCount == 3;
     }
-
-    console.log(aliveCount)
-    if (aliveCount == 2) { return true;}
-    else { return false;}
 }
-
-function updatedGrid(currentState: State) {
-    buttonStart.addEventListener("click", (ev) => {
-        nextState[i][j].push({ isAlive: isCellGoingToLive(currentState, cell, )})
-})}
 
 const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
 const ctx = canvas.getContext("2d")!;
 const buttonStart = document.getElementById("buttonStart") as HTMLButtonElement;
-const gridHandler = new GridHandler(canvas, 10, 10);
+let intervalID = 0;
+buttonStart.addEventListener("click", () => {
+    intervalID = setInterval(() => {
+        currentState = nextState(currentState);
+        gridHandler.drawGrid(currentState);
+    }, 100);
+});
 
+const buttonStop = document.getElementById("buttonStop") as HTMLButtonElement;
+buttonStop.addEventListener("click", () => {
+    clearInterval(intervalID);
+});
 
-gridHandler.drawGrid();
+const gridHandler = new GridHandler(canvas, 40, 40);
+gridHandler.drawGrid(createInitialGrid());
 let currentState = createInitialGrid();
 handleClick(currentState);
-const processGrid = nextState();
-const willLive: boolean = isCellGoingToLive(processGrid, )
-
