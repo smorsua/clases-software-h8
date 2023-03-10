@@ -1,9 +1,6 @@
 export {};
-import { WordRating } from "./types";
+import {  WordRating } from "./types";
 import { WordleWordComparator } from "./WordleComparator";
-
-
-
 
 let nextLetterIndex = 0;
 let currentRowIndex = 0;
@@ -11,7 +8,6 @@ var currentGuess: string[] = [];
 var currentGuessIndex = 0;
 const solution = "INPUT";
 const solutionArr = ["I", "N", "P", "U", "T"];
-
 
 const NUMBER_OF_GUESSES = 6;
 const WORD_LENGTH = 5;
@@ -47,15 +43,14 @@ function handleUserInput() {
         } else if (userInput == "Enter") {
             enterWord();
         } else {
-            messageDisplay("The word does not have 5 letters")
+            messageDisplay("The word does not have 5 letters");
         }
     });
 }
 
 function messageDisplay(sentence: string) {
     alert(sentence);
-    
-}  
+}
 
 function addLetter(userInput: string) {
     if (nextLetterIndex < WORD_LENGTH) {
@@ -107,22 +102,17 @@ function updateRow(rating: WordRating, answer: string) {
     }
 
     if (answer == solution) {
-        messageDisplay("You've won!!")
+        messageDisplay("You've won!!");
     }
-
-    
 }
-
- 
 
 const processWord = new WordleWordComparator(solutionArr);
 initBoard();
-
 
 while (currentGuessIndex <= NUMBER_OF_GUESSES) {
     handleUserInput();
 }
 
 if (currentGuessIndex > NUMBER_OF_GUESSES) {
-    messageDisplay("You've lost")
+    messageDisplay("You've lost");
 }
