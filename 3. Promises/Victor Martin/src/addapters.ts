@@ -1,6 +1,6 @@
 export type Poke_Api_types = {
     abilities: {
-        ability: [Object];
+        ability: { abilityName: string }[];
         is_hidden: boolean;
         slot: number;
     };
