@@ -12,6 +12,9 @@ readline.on("line", (input) => {
     const userInput = input.toUpperCase();
     client.write(userInput);
 });
+readline.on("data", (serverData) => {
+    console.log(serverData);
+});
 const client = (0, net_1.createConnection)({ port: 8000, host: "127.0.0.1" }, () => {
     console.log("Connected successfully");
 });

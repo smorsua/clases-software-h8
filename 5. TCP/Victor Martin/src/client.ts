@@ -14,6 +14,11 @@ readline.on("line", (input) => {
     client.write(userInput);
 });
 
+readline.on("data", (serverData) => {
+    // en cuanto el server envía mensajes, cada cliente los recibirá
+    console.log(serverData.toString());
+});
+
 const client = createConnection({ port: 8000, host: "127.0.0.1" }, () => {
     console.log("Connected successfully");
 });
