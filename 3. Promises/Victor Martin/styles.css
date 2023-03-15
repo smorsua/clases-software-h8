@@ -104,3 +104,11 @@ button {
 button:hover {
     filter: brightness(1.05);
 }
+
+#pokemonSprite {
+    height: 250px;
+    width: 250px;
+    display: block;
+    align-content: center;
+    justify-content: center;
+}
